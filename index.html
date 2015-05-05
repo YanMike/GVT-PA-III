@@ -1,0 +1,56 @@
+<!--
+    Author: Yannick Bachteler
+    Version 1.0, 12.04.2015: initial creation
+ -->
+
+<!DOCTYPE html>
+<html>
+<body onload="startWebGL()">
+
+<div>
+    Graphical Visualisation Technologies <br>
+    Projektaufgabe 3: Farbige 2D Geometrie <br>
+    &copy; 2015 - Yannick Bachteler
+</div>
+
+<canvas id="canvas" width="600" height="600"></canvas>
+
+<script src="js/robot.js"></script>
+
+<!-- black 'n white -->
+<script id="shader-vs" type="x-shader/x-vertex">
+            attribute vec3 pos;
+            void main() {
+                gl_Position =  vec4(pos*0.1-0.5, 2);
+                gl_PointSize = 10.0;
+            }
+        </script>
+
+<script id="shader-fs" type="x-shader/x-fragment">
+            void main() {
+                gl_FragColor = vec4(0,0,0, 1);
+             }
+        </script>
+
+<!-- colored -->
+<script id="shader-vs-colored" type="x-shader/x-vertex">
+            attribute vec3 pos;
+            attribute vec4 col;
+            varying vec4 color;
+            void main(){
+                color = col;
+                gl_Position = vec4(pos*0.1-0.5, 2);
+                gl_PointSize = 10.0;
+            }
+        </script>
+
+<script id="shader-fs-colored" type="x-shader/x-fragment">
+    precision mediump float;
+    varying vec4 color;
+    void main() {
+        gl_FragColor = color;
+    }
+</script>
+
+</body>
+</html>
