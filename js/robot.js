@@ -1,7 +1,7 @@
 /**
  * Created by Yannick Bachteler
- * Version 0.1, 12.04.2015: Initial setup
- * Version 1.0, 22.04.2015: bug fix
+ * Version 0.1, 05.05.2015: get code running with random colors
+ * Version 1.0, DD.MM.YYYY: final colors
  */
 
 
@@ -9,9 +9,9 @@
 
 /**
  * Global Veriables
- * for indices buffer (ibo_*) and vertices buffer (vbo_*) of body parts
+ * for indices buffer (ibo_*), vertices buffer (vbo_*) and color buffers (col_*) of body parts
  * program variable (shaderProgram)
- * attribute variable (posAttrib)
+ * attribute variables (posAttrib, colAttrib)
  */
 var gl;
 var shaderProgram, posAttrib, colAttrib, vbo_body, col_body, vbo_legs, col_legs, ibo_body, ibo_legs, vbo_arms, col_arms, ibo_arms, vbo_head, col_head, ibo_head, vbo_eyes, col_eyes, vbo_mouth, col_mouth;
@@ -295,50 +295,67 @@ function render() {
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo_head);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo_head);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_head);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawElements(gl.LINE_STRIP, ibo_head.numberOfElements,
         gl.UNSIGNED_SHORT, 0);
+    /* *** */
 
     /* *** left & right arm *** */
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo_arms);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo_arms);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_arms);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawElements(gl.TRIANGLE_STRIP, ibo_arms.numberOfElements,
         gl.UNSIGNED_SHORT, 0);
+    /* *** */
 
     /* *** legs *** */
      gl.bindBuffer(gl.ARRAY_BUFFER, vbo_legs);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo_legs);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_legs);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawElements(gl.TRIANGLE_STRIP, ibo_legs.numberOfElements,
         gl.UNSIGNED_SHORT, 0);
+    /* *** */
 
     /* *** body *** */
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo_body);
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibo_body);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_body);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawElements(gl.TRIANGLE_FAN, ibo_body.numberOfElements,
         gl.UNSIGNED_SHORT, 0);
+    /* *** */
 
     /* *** mouth *** */
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo_mouth);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_mouth);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawArrays(gl.LINES, 0,6);
+    /* *** */
 
     /* *** eyes *** */
     gl.bindBuffer(gl.ARRAY_BUFFER, vbo_eyes);
     gl.vertexAttribPointer(posAttrib, 3, gl.FLOAT, false, 0, 0);
+
     gl.bindBuffer(gl.ARRAY_BUFFER, col_eyes);
     gl.vertexAttribPointer(colAttrib, 4, gl.FLOAT, false, 0, 0);
+
     gl.drawArrays(gl.POINTS, 0,2);
-    /**/
+    /* *** */
 }
